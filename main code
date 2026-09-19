@@ -1,0 +1,38 @@
+import logging
+import os
+def setup_logger(name="AppLogger", log_file="app.log"):
+    """Sets up a dual-target logger (console + file)."""
+    try:
+        logger = logging.getLogger(name)
+        logger.setLevel(logging.DEBUG)
+
+        if not logger.handlers:
+            # File Handler
+            fh = logging.FileHandler(log_file, encoding="utf-8")
+            fh.setLevel(logging.DEBUG)
+            
+            # Console Handler
+            ch = logging.StreamHandler()
+            ch.setLevel(logging.INFO)
+
+            # Formatter
+            formatter = logging.Formatter("%(asctime)s - [%(levelname)s] - %(name)s - %(message)s")
+            fh.setFormatter(formatter)
+            ch.setFormatter(formatter)
+
+            logger.addHandler(fh)
+            logger.addHandler(ch)
+
+        print("[+] Logger initialized successfully.")
+        return logger
+    except Exception as e:
+        print(f"[-] Error setting up logger: {e}")
+        return None
+if __name__ == "__main__":
+    log = setup_logger()
+    log.info("This is an info test message.")
+    log.error("This is an error test message.")
+#ALL THIS SCRIPT DOES IS SETTING UP LOGGING CONFIG
+#HOW TO RUN
+#INSTALL PYTHON & OS & LOGGING LIBLARY
+#OR JUST TEXT ME ON MY TELEGRAM, WILL BE DONE FOR 25-100$: @Myhamed91
